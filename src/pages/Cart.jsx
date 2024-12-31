@@ -1,7 +1,10 @@
 import React from 'react'
 import {Link} from "react-router-dom"
+import {useDispatch, useSelector} from 'react-redux'
 
 function Cart () {
+  const dispatch = useDispatch()
+  const cartItem = useSelector((state)=> state.cart.items)
   return (
     <div className="container container--cart">
       <div className="cart">

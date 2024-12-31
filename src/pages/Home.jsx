@@ -9,16 +9,16 @@ import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 import { searchContext } from '../App'
 
+
 const Home = () => {
   const dispatch = useDispatch()
   const {categoryId, sortType, currentPage} = useSelector((state) => state.filter)
   const sort = sortType.value
-  console.log(sort)
-  const {searchValue} = React.useContext(searchContext)
-const [pizzas, setPizzas] = React.useState([])
-const [isLoading, setIsLoading] = React.useState(true)
 
-const [selectedOption, setSelectedOption] =React.useState(0)
+  const {searchValue} = React.useContext(searchContext)
+  const [pizzas, setPizzas] = React.useState([])
+  const [isLoading, setIsLoading] = React.useState(true)
+
 
 const onChangePage = (number) => {
   dispatch(setCurrentPage(number))
@@ -43,7 +43,9 @@ React.useEffect( () => {
   window.scrollTo(0, 0)
 },
     [categoryId, sortType, currentPage] )
-    
+
+
+
     const allPizzas = pizzas
     .filter((obj) => {
     // Если searchValue не задано, возвращаем true (все пиццы проходят фильтр)
@@ -63,7 +65,7 @@ React.useEffect( () => {
     <div className='container'>
           <div className="content__top">
            <Categories value={categoryId} onClickCategory={ (i)=>onClickCategory(i) }/> 
-           <Sort sortValue={sortType}  onChangeSort={ (option)=> setSortType(option)}/>
+           <Sort sortValue={sortType} />
           
           </div>
           <h2 className="content__title">All our pizzas</h2>
