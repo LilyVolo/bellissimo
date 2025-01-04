@@ -5,7 +5,10 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound/NotFound';
 import Cart from './pages/Cart'
 import {Routes, Route } from "react-router-dom";
+import OnePizzaPage from './pages/OnePizzaPage'
+
 export const searchContext = React.createContext()
+
 
 function App() {
 const [searchValue, setSearchValue] = React.useState('')
@@ -21,6 +24,7 @@ const [searchValue, setSearchValue] = React.useState('')
             <Route path='/'element={<Home />}/>
             <Route path='/cart' element={<Cart/>}/>
             <Route path='*' element={<NotFound/>}/>
+            <Route path='/pizza/:id' element={<OnePizzaPage/>}/>
           </Routes>
         
       </div>

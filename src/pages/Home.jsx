@@ -8,6 +8,8 @@ import {setCategoryId, setCurrentPage} from '../redux/slices/filterSlice.js'
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 import { searchContext } from '../App'
+import { Link } from 'react-router-dom'
+
 
 
 const Home = () => {
@@ -19,6 +21,9 @@ const Home = () => {
   const [pizzas, setPizzas] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
 
+  let url = `https://671ba6912c842d92c380c897.mockapi.io/bellissimo?page=${currentPage}&limit=4&${
+    categoryId > 0 ? `category=${categoryId}` : ''
+  }&sortBy=${sort}&order=desc`;
 
 const onChangePage = (number) => {
   dispatch(setCurrentPage(number))
@@ -28,21 +33,22 @@ const onClickCategory = (id) => {
 dispatch(setCategoryId(id))
 }
 
-React.useEffect( () => {
-  setIsLoading(true)
-  axios.
-  get(
-    `https://671ba6912c842d92c380c897.mockapi.io/bellissimo?page=${currentPage}&limit=4&${
-    categoryId >0 ? `category=${categoryId}` : ''}&sortBy=${sort}&order=desc
-  `)
-  .then((res) => {
-    setPizzas(res.data)
-    setIsLoading(false) 
-    console.log(currentPage)
-  })
-  window.scrollTo(0, 0)
-},
-    [categoryId, sortType, currentPage] )
+React.useEffect(() => {
+  const fetchData = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(url);
+      setPizzas(response.data);
+    } catch (error) {
+      console.error("Error fetching pizzas:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  fetchData();
+  window.scrollTo(0, 0);
+}, [categoryId, sortType, currentPage, url]);
 
 
 
@@ -55,7 +61,9 @@ React.useEffect( () => {
        return obj.title.toLowerCase().includes(searchValue.toLowerCase());
      })
     .map((obj) => (
-      <PizzaBlock key={obj.id} {...obj } />
+      <Link  key={obj.id} to={`pizza/${obj.id}`} >
+      <PizzaBlock {...obj } />
+      </Link>
     ));
 
     const skeletonArr = [...new Array(6)].map((_, i) => 
