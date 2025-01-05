@@ -7,10 +7,18 @@ import {useLocation} from 'react-router-dom'
 function Header() {
   const {items, totalPrice} = useSelector(state => state.cart)
   const totalCount = items.reduce((sum, item) => sum + item.count, 0)
+  const isMounted = React.useRef(false)
 
+  React.useEffect(() => {
+    if(isMounted.current) {
+      const json = JSON.stringify(items)
+      localStorage.setItem('cart', json)
+    }
+    isMounted.current =true
+    },
+   [items])
+  
   const {pathname} = useLocation()
-  console.log(location)
-
     return (
     <div className="header">
     <div className="container">

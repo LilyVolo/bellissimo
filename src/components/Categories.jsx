@@ -1,16 +1,16 @@
 import React from 'react'
 
-function Categories({value, onClickCategory}) {
+const Categories = React.memo(({value, onClickCategory}) => {
    
-    const categoriess = ['All', 'Meat', 'Vegeterian', 'Grilled', 'Spicy', 'Calzones']
-  
+ const categoriess = React.useMemo(() => ['All', 'Meat', 'Vegetarian', 'Grilled', 'Spicy', 'Calzones'], []);
 
+  console.log('check rerender')
     return (
       <div className="categories">
       <ul>
         { categoriess.map((name, index) => (
             <li key={index} onClick={()=> onClickCategory(index)} 
-            className={value == index ? 'active' : ''}>
+            className={value === index ? 'active' : ''}>
                 {name}
             </li>
         ))} 
@@ -19,5 +19,5 @@ function Categories({value, onClickCategory}) {
     </div>
     )
     }
-
+  )
     export default Categories;

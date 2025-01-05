@@ -12,6 +12,8 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.9",
+    "clsx": "^2.1.1",
+    "clx": "^1.0.0",
     "lodash.debounce": "^4.0.8",
     "qs": "^6.13.1",
     "react": "^18.3.1",

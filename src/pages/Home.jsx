@@ -8,7 +8,7 @@ import {setCategoryId, setCurrentPage} from '../redux/slices/filterSlice.js'
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 import { searchContext } from '../App'
-import { Link } from 'react-router-dom'
+
 
 
 
@@ -29,9 +29,11 @@ const onChangePage = (number) => {
   dispatch(setCurrentPage(number))
 }
 
-const onClickCategory = (id) => {
-dispatch(setCategoryId(id))
-}
+const onClickCategory = React.useCallback(
+  (id) => {
+  dispatch(setCategoryId(id))
+  }, [dispatch]
+)
 
 React.useEffect(() => {
   const fetchData = async () => {
@@ -61,10 +63,9 @@ React.useEffect(() => {
        return obj.title.toLowerCase().includes(searchValue.toLowerCase());
      })
     .map((obj) => (
-      <Link  key={obj.id} to={`pizza/${obj.id}`} >
-      <PizzaBlock {...obj } />
-      </Link>
+      <PizzaBlock key={obj.id} {...obj } />
     ));
+
 
     const skeletonArr = [...new Array(6)].map((_, i) => 
       <Skeleton key={i} />)
