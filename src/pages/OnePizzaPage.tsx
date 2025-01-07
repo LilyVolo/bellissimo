@@ -2,8 +2,12 @@ import React from 'react'
 import {useParams} from 'react-router-dom'
 import axios from 'axios'
 
-function OnePizzaPage() {
-    const [pizza, setPizza] = React.useState([])
+const OnePizzaPage: React.FC = () => {
+    const [pizza, setPizza] = React.useState<{
+        title: string;
+        price: number;
+    } | undefined >()
+
     let {id} = useParams()
     console.log(pizza)
 
@@ -28,6 +32,7 @@ function OnePizzaPage() {
     <div className="container">
        <h1>OnePizzaPage </h1> 
         <h2>{pizza.title}</h2>
+        <h2>{pizza.price}</h2>
         </div>
   )
 }

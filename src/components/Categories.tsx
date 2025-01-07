@@ -1,6 +1,11 @@
 import React from 'react'
 
-const Categories = React.memo(({value, onClickCategory}) => {
+type CategoriesProps  = {
+  value : number;
+  onClickCategory: any;
+}
+
+const Categories = React.memo<CategoriesProps>(({value, onClickCategory}) => {
    
  const categoriess = React.useMemo(() => ['All', 'Meat', 'Vegetarian', 'Grilled', 'Spicy', 'Calzones'], []);
 

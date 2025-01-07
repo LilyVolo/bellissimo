@@ -7,16 +7,13 @@ import Cart from './pages/Cart'
 import {Routes, Route } from "react-router-dom";
 import OnePizzaPage from './pages/OnePizzaPage'
 
-export const searchContext = React.createContext()
-
 
 function App() {
-const [searchValue, setSearchValue] = React.useState('')
 
   return (
     <>
      <div className="wrapper">
-     <searchContext.Provider value={{searchValue, setSearchValue}}>
+
       <Header  />
       <div className="content">
         
@@ -28,7 +25,6 @@ const [searchValue, setSearchValue] = React.useState('')
           </Routes>
         
       </div>
-      </searchContext.Provider>
     </div>
     </>
   )

@@ -7,17 +7,13 @@ import Pagination from '../components/pagination/index.jsx'
 import {setCategoryId, setCurrentPage} from '../redux/slices/filterSlice.js'
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
-import { searchContext } from '../App'
-
-
 
 
 const Home = () => {
   const dispatch = useDispatch()
-  const {categoryId, sortType, currentPage} = useSelector((state) => state.filter)
+  const {categoryId, sortType, currentPage, searchValue} = useSelector((state) => state.filter)
   const sort = sortType.value
 
-  const {searchValue} = React.useContext(searchContext)
   const [pizzas, setPizzas] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(true)
 

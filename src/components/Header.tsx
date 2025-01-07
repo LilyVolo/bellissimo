@@ -6,7 +6,7 @@ import {useLocation} from 'react-router-dom'
 
 function Header() {
   const {items, totalPrice} = useSelector(state => state.cart)
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0)
+  const totalCount = items.reduce((sum:number, item:any) => sum + item.count, 0)
   const isMounted = React.useRef(false)
 
   React.useEffect(() => {

@@ -7,20 +7,21 @@ const Sort = React.memo( () => {
   const dispatch = useDispatch()
   const sort = useSelector(state=> state.filter.sortType)
   const [open, setOpen] = React.useState(false)
-  const sortRef = React.useRef()
+  const sortRef = React.useRef<HTMLDivElement | null >(null)
 
-  const options = ['rating', 'price', 'title']
-  const choseOption = (obj) => {
+  const options: string[] = ['rating', 'price', 'title']
+  const choseOption = (obj: {value:string; i: number}) => {
     setOpen(false)
     dispatch(setSortType(obj))
   }
 
-  React.useEffect ( () =>{
-    const handleClickOutside = (event) => {
-      if (!event.composedPath().includes(sortRef.current)) {
-        setOpen(false)
-      }
-    }
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+        const path = event.composedPath();
+        if (sortRef.current && !path.includes(sortRef.current)) {
+            setOpen(false);
+        }
+    };
 
     document.body.addEventListener('click', handleClickOutside)
 
