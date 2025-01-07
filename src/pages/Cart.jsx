@@ -9,7 +9,7 @@ function Cart () {
   const dispatch = useDispatch()
   const {totalPrice, items} = useSelector((state)=> state.cart)
   const totalCount = items.reduce((sum, item) => sum + item.count, 0)
-  console.log(items, 2025)
+
   const onClickClear = () => {
     if (window.confirm('Do you want to delete all ites from the cart?')) {
       dispatch(clearItems())
@@ -17,7 +17,6 @@ function Cart () {
   }
 
   if(items.length===0) {
-    console.log(2026)
     return <CartEmpty/>
   }
 

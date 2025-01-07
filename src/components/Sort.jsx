@@ -2,7 +2,7 @@ import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {setSortType} from '../redux/slices/filterSlice.js'
 
-function Sort ()  {
+const Sort = React.memo( () => {
 
   const dispatch = useDispatch()
   const sort = useSelector(state=> state.filter.sortType)
@@ -65,5 +65,5 @@ function Sort ()  {
       </div>
   )
 }
-
+)
 export default Sort
