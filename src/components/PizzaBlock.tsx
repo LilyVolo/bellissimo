@@ -3,9 +3,30 @@ import {useDispatch, useSelector} from 'react-redux'
 import {addItem} from '../redux/slices/cartSlice'
 import { Link } from 'react-router-dom'
 
-function PizzaBlock({id, title, price, imageURL, sizes, types}) {
+type PizzaBlockProps = {
+    id: string, 
+    title: string, 
+    price: number, 
+    imageURL?: string, 
+    sizes: [],
+    types: []
+}
+interface CartItem {
+  id: string;
+  title: string;
+  price: number;
+  imageURL?: string;
+  size: number;
+  type: string;
+  count?: number ;
+}
+
+const PizzaBlock: React.FC<PizzaBlockProps> =  
+({id, title, price, imageURL, sizes, types}) =>
+
+{
   const dispatch = useDispatch()
-  const cartItem = useSelector((state)=> state.cart.items.find((obj)=> obj.id === id))
+  const cartItem = useSelector((state: any)=> state.cart.items.find((obj: CartItem )=> obj.id === id))
   const [activeCrust, setActiveCrust] = React.useState(0)
   const [activeSize, setActiveSize] = React.useState(0)
 
@@ -14,7 +35,7 @@ function PizzaBlock({id, title, price, imageURL, sizes, types}) {
   const crust = ['thin crust', 'thick crust']
 
   const onClickAdd = () => {
-      const item = {
+      const item: CartItem  = {
         id, 
         title,
         price,
@@ -36,7 +57,7 @@ function PizzaBlock({id, title, price, imageURL, sizes, types}) {
       <h4 className="pizza-block__title">{title}</h4>
   <div className="pizza-block__selector">
     <ul>
-    {types.map((type, index) => (
+    {types.map((type: any, index: number) => (
         <li key={index}
         onClick={()=> setActiveCrust(type)}
         className={activeCrust == type ? 'active' : ''}> 

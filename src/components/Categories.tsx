@@ -2,7 +2,7 @@ import React from 'react'
 
 type CategoriesProps  = {
   value : number;
-  onClickCategory: any;
+  onClickCategory: (i: number) => void;
 }
 
 const Categories = React.memo<CategoriesProps>(({value, onClickCategory}) => {
