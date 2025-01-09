@@ -8,7 +8,7 @@ const { items, totalPrice } = getCartFromLS();
 // Типы для объектов в корзине
 interface CartItem {
   id: string; 
-  price: number;
+  price?: number;
   count?: number;
 }
 
@@ -27,7 +27,7 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem(state, action: PayloadAction<CartItem>) {
-      const findItem = state.items.find((obj) => obj.id === action.payload.id);
+      const findItem: any = state.items.find((obj) => obj.id === action.payload.id);
       if (findItem) {
         findItem.count++;
       } else {
@@ -38,7 +38,7 @@ const cartSlice = createSlice({
     },
 
     minusItem(state, action: PayloadAction<CartItem>) {
-      const findItem = state.items.find((obj) => obj.id === action.payload.id);
+      const findItem :any = state.items.find((obj) => obj.id === action.payload.id);
       if (findItem) {
         if (findItem.count > 1) {
           findItem.count--;

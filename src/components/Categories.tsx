@@ -9,7 +9,6 @@ const Categories = React.memo<CategoriesProps>(({value, onClickCategory}) => {
    
  const categoriess = React.useMemo(() => ['All', 'Meat', 'Vegetarian', 'Grilled', 'Spicy', 'Calzones'], []);
 
-  console.log('check rerender')
     return (
       <div className="categories">
       <ul>

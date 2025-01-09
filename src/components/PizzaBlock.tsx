@@ -3,28 +3,29 @@ import {useDispatch, useSelector} from 'react-redux'
 import {addItem} from '../redux/slices/cartSlice'
 import { Link } from 'react-router-dom'
 
-type PizzaBlockProps = {
+export type PizzaBlockProps = {
     id: string, 
     title: string, 
     price: number, 
-    imageURL?: string, 
+    imageUrl: string, 
     sizes: [],
     types: []
 }
-interface CartItem {
+export interface CartItem {
   id: string;
   title: string;
   price: number;
-  imageURL?: string;
+  imageUrl: string;
   size: number;
   type: string;
   count?: number ;
 }
 
 const PizzaBlock: React.FC<PizzaBlockProps> =  
-({id, title, price, imageURL, sizes, types}) =>
+({id, title, price, imageUrl, sizes, types}) =>
 
-{
+  {
+
   const dispatch = useDispatch()
   const cartItem = useSelector((state: any)=> state.cart.items.find((obj: CartItem )=> obj.id === id))
   const [activeCrust, setActiveCrust] = React.useState(0)
@@ -39,7 +40,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> =
         id, 
         title,
         price,
-        imageURL,
+        imageUrl,
         size: sizes[activeSize],
         type: crust[activeCrust],
       }
@@ -51,13 +52,15 @@ const PizzaBlock: React.FC<PizzaBlockProps> =
           <Link   to={`pizza/${id}`} >
       <img
       className="pizza-block__image"
-      src={imageURL}
+      src={imageUrl}
       alt="Pizza"
       />
       <h4 className="pizza-block__title">{title}</h4>
+      </Link>
   <div className="pizza-block__selector">
     <ul>
-    {types.map((type: any, index: number) => (
+      
+    {types &&  types.map((type: number, index: number) => (
         <li key={index}
         onClick={()=> setActiveCrust(type)}
         className={activeCrust == type ? 'active' : ''}> 
@@ -65,7 +68,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> =
       ))}
     </ul>
     <ul>
-      {sizes.map((size, index) => (
+    {sizes && sizes.map((size: number, index: number) => (
         <li key={index}
         onClick={()=> setActiveSize(index)}
         className={activeSize == index ? 'active' : ''}>
@@ -75,7 +78,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> =
       )}
     </ul>
   </div>
-  </Link>
+ 
   <div className="pizza-block__bottom">
     <div className="pizza-block__price">at {price} euros</div>
     <button onClick={onClickAdd} className="button button--outline button--add">

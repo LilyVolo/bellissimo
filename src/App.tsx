@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound/NotFound';
 import Cart from './pages/Cart'
 import {Routes, Route } from "react-router-dom";
-import OnePizzaPage from './pages/OnePizzaPage'
+import OnePizzaPage from './pages/onePizza/OnePizzaPage'
 
 
 function App() {

@@ -2,6 +2,7 @@ import React from 'react'
 import {useDispatch} from 'react-redux'
 import {addItem, minusItem, removeItem} from '../redux/slices/cartSlice'
 import clsx from 'clsx'
+import { Link } from 'react-router-dom'
 
 type CarItemProps = {
   id: string, 
@@ -9,14 +10,13 @@ type CarItemProps = {
   type: string, 
   price: number, 
   count: number, 
-  imageURL?: string, 
+  imageUrl: string, 
   size: number
 }
 
 const CartItem: React.FC<CarItemProps> =  
-({id, title, type, price, count, imageURL, size}) => {
+({id, title, type, price, count, imageUrl, size}) => {
     const dispatch = useDispatch()
-
     const onClickPlus = () => {
         dispatch(
             addItem({
@@ -31,26 +31,28 @@ const CartItem: React.FC<CarItemProps> =
 
     const onClickRemove = () => {
         if (window.confirm('Are you sure you want to remove?')) {
-            console.log('delete')
-            dispatch(removeItem({ id, price }))
+            dispatch(removeItem({ id }))
         }
     }
 
   return (
     <div className="cart__item">
-        
+    
+ 
   <div className="cart__item-img">
-    {/*нужно вставить картинку из пропса*/}
+  <Link   to={`/pizza/${id}`} >
     <img
       className="pizza-block__image"
-      src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
+      src={imageUrl}
       alt="Pizza"
     />
+      </Link>
   </div>
   <div className="cart__item-info">
     <h3>{title}</h3>
     <p>{type}, {size}</p>
   </div>
+
   <div className="cart__item-count">
     <button onClick={onClickMinus} 
     disabled={count===1}
