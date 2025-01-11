@@ -2,14 +2,14 @@ import React from 'react'
 import './scss/app.scss'
 import Header from './components/Header';
 import Home from './pages/Home';
-import NotFound from './pages/NotFound/NotFound';
+import NotFound from './pages/notFound/NotFound';
 import Cart from './pages/Cart'
 import {Routes, Route } from "react-router-dom";
 import OnePizzaPage from './pages/onePizza/OnePizzaPage'
 
 
 function App() {
-
+console.log('pizza run')
   return (
     <>
      <div className="wrapper">

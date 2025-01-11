@@ -12,7 +12,7 @@ type CarItemProps = {
   count: number, 
   imageUrl: string, 
   size: number,
-  uniquKey?: string
+  uniquKey?: any
 }
 
 
