@@ -9,6 +9,8 @@ import styles from './onePizza.module.scss';
 const OnePizzaPage: React.FC = () => {
   const [pizza, setPizza] = React.useState<CartItem | null>(null);
   const { id } = useParams<{ id: string }>();
+  const totalCountersById = useSelector((state: { cart: { totalCountersById: { [id: string]: number } } }) => state.cart.totalCountersById);
+  const totalCountForId = totalCountersById[id] || 0; 
   const dispatch = useDispatch();
 
   const cartItem = useSelector((state: any) =>
@@ -108,7 +110,7 @@ const OnePizzaPage: React.FC = () => {
             />
           </svg>
           <span>Add</span>
-          {addedCount > 0 && <i>{addedCount}</i>}
+          {addedCount > 0 && <i>{totalCountForId}</i>}
         </button>
       </div>
     </div>

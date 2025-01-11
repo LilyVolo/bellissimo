@@ -10,10 +10,10 @@ export type CartItemProps = {
   title: string;
   type: string;
   price: number;
-  count: number;
+  count?: number;
   imageUrl: string;
   size: number;
-  uniquKey: string;
+  uniquKey?: string;
   }
 
 const Cart:React.FC = () => {
@@ -104,7 +104,7 @@ const Cart:React.FC = () => {
         {
           items && items.length > 0 ? (
             items.map((obj: CartItemProps) => (
-              <CartItem key={obj.uniquKey} {...obj} />
+              <CartItem key={obj.uniquKey} {...obj} uniquKey={obj.uniquKey}/>
             ))
           ) : (
             <p>No items in cart</p> 

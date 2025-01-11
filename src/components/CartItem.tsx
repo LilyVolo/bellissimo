@@ -10,13 +10,14 @@ type CarItemProps = {
   type: string, 
   price: number, 
   count: number, 
-  imageUrl?: string, 
-  size: number
+  imageUrl: string, 
+  size: number,
+  uniquKey?: string
 }
 
 
 const CartItem: React.FC<CarItemProps> =  
-({id, title, type, price, count, imageUrl, size}) => {
+({id, title, type, price, count, imageUrl, size, uniquKey}) => {
 
     const dispatch = useDispatch()
     const onClickPlus = () => {
@@ -29,13 +30,19 @@ const CartItem: React.FC<CarItemProps> =
 
     const onClickMinus = () => {
         dispatch(
-            minusItem({ id, 
-              price })
+            minusItem({ 
+              id, 
+              price,
+              uniquKey
+             })
         )}
 
     const onClickRemove = () => {
         if (window.confirm('Are you sure you want to remove?')) {
-            dispatch(removeItem({ id }))
+            dispatch(removeItem({ 
+              id,
+              uniquKey
+            }))
         }
     }
 

@@ -21,20 +21,13 @@ const PizzaBlock: React.FC<PizzaBlockProps> =
 
   const dispatch = useDispatch()
   const cartItem = useSelector((state: any)=> state.cart.items.find((obj: CartItemProps )=> obj.id === id))
+  const totalCountersById = useSelector((state: { cart: { totalCountersById: { [id: string]: number } } }) => state.cart.totalCountersById);
+
   const [activeCrust, setActiveCrust] = React.useState(0)
   const [activeSize, setActiveSize] = React.useState(0)
-   const { items } = useSelector((state: { cart: { totalPrice: number; items: CartItemProps[] } }) => state.cart)
-   const itemsArray = Array.isArray(items) ? items : Object.values(items);
+   
+  const totalCountForId = totalCountersById[id] || 0; 
 
-
-   const totalCounter : any = itemsArray
-     .filter((el) => el.id === id)
-     .reduce((sum, el) => sum + el.count, 0);
- 
-   console.log(totalCounter); 
-
-  
-  console.log(totalCounter)
   const addedCount = cartItem ? cartItem.count : 0
   
   const crust = ['thin crust', 'thick crust']
@@ -49,7 +42,6 @@ const PizzaBlock: React.FC<PizzaBlockProps> =
         type: crust[activeCrust],
       }
       dispatch(addItem(item))
-      console.log(cartItem )
     }
 
     return (
@@ -100,7 +92,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> =
         />
       </svg>
       <span >Add</span>
-      {cartItem && <i>{totalCounter}</i>} 
+      {cartItem && <i>{totalCountForId}</i>} 
     </button>
   </div>
   </div>
