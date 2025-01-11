@@ -10,7 +10,7 @@ const Search: React.FC = () => {
   const inputRef = React.useRef<HTMLInputElement>(null)
   const [value, setValue] = React.useState('')
   const location = useLocation();
-  console.log(location)
+  
   const onClickClear = () => {
   dispatch(setSearchValue(''));
   setValue('')

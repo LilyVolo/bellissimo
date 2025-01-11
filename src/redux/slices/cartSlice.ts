@@ -2,14 +2,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getCartFromLS } from '../../utiles/getCartFromLS';
 import { calcTotalPrice } from '../../utiles/calcTotalPrice';
 
-// Получаем начальные данные
+
 const { items, totalPrice } = getCartFromLS();
 
-// Типы для объектов в корзине
 interface CartItem {
   id: string; 
   price?: number;
   count?: number;
+  type?: string;
+  size?: number;
+  uniquKey?: string;
 }
 
 interface CartState {
@@ -27,11 +29,15 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem(state, action: PayloadAction<CartItem>) {
-      const findItem: any = state.items.find((obj) => obj.id === action.payload.id);
+      const { id, type, size } = action.payload;
+      const uniqueKey = `${id}-${type}-${size}`
+      
+      const findItem = state.items.find((obj) => obj.id === action.payload.id 
+      && obj.type === action.payload.type && obj.size === action.payload.size) ;
       if (findItem) {
         findItem.count++;
       } else {
-        state.items.push({ ...action.payload, count: 1 });
+        state.items.push({ ...action.payload, count: 1, uniquKey: uniqueKey });
       }
 
       state.totalPrice = calcTotalPrice(state.items);

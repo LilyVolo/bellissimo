@@ -14,13 +14,17 @@ type CarItemProps = {
   size: number
 }
 
+
 const CartItem: React.FC<CarItemProps> =  
 ({id, title, type, price, count, imageUrl, size}) => {
+
     const dispatch = useDispatch()
     const onClickPlus = () => {
         dispatch(
             addItem({
-                id
+                id, 
+                type,
+                size
             }) ) }
 
     const onClickMinus = () => {

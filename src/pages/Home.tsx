@@ -42,8 +42,8 @@ const Home: React.FC = () => {
   
   const sort = sortType.value
 
-  const [pizzas, setPizzas] = React.useState<Pizza[]>([]) // Типизируем pizzas как массив Pizza
-  const [isLoading, setIsLoading] = React.useState<boolean>(true) // Типизируем isLoading как boolean
+  const [pizzas, setPizzas] = React.useState<Pizza[]>([]) 
+  const [isLoading, setIsLoading] = React.useState<boolean>(true) 
 
   let url = `https://671ba6912c842d92c380c897.mockapi.io/bellissimo?page=${currentPage}&${
     categoryId > 0 ? `category=${categoryId}` : ''
@@ -51,7 +51,7 @@ const Home: React.FC = () => {
 
 
   const onChangePage = (selectedPage: number) => {
-    setCurrentPage(selectedPage); // Обновляем текущую страницу
+    setCurrentPage(selectedPage); 
   };
   const onClickCategory = React.useCallback(
     (id: number) => {
@@ -87,8 +87,8 @@ const Home: React.FC = () => {
       return obj.title.toLowerCase().includes(searchValue.toLowerCase())
     })
     .slice(indexOfFirstPizza, indexOfLastPizza)
-    .map((obj: Pizza) => (
-      <PizzaBlock key={obj.id} {...obj} />
+    .map((obj: Pizza, i) => (
+      <PizzaBlock key={`${obj.id}-${i}`} {...obj} />
     ))
     
   const skeletonArr = [...new Array(6)].map((_, i) => <Skeleton key={i} />)

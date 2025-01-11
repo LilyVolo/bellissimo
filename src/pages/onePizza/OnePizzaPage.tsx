@@ -113,9 +113,9 @@ const OnePizzaPage: React.FC = () => {
       </div>
     </div>
     <div className={styles.pizzaBlockText}>
-      <h1 >
+      <h2 >
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consectetur explicabo dolore, sapiente aliquid nostrum sequi? Reiciendis voluptas magni maiores exercitationem voluptatibus obcaecati facere atque nemo animi doloremque! Repudiandae, impedit porro.
-      </h1>
+      </h2>
     </div>
     </div> 
   );

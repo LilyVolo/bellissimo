@@ -13,6 +13,7 @@ type CartItemProps = {
   count: number;
   imageURL: string;
   size: number;
+  uniquKey: string;
   }
 
 const Cart:React.FC = () => {
@@ -103,7 +104,7 @@ const Cart:React.FC = () => {
         {
           items && items.length > 0 ? (
             items.map((obj: CartItemProps) => (
-              <CartItem key={obj.id} {...obj} />
+              <CartItem key={obj.uniquKey} {...obj} />
             ))
           ) : (
             <p>No items in cart</p> 
