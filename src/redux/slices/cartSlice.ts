@@ -35,6 +35,7 @@ const cartSlice = createSlice({
       const { id, type, size } = action.payload;
     
       const uniqueKey = `${id}-${type}-${size}`;
+
       const findItem = state.items.find(
         (obj) => obj.id === action.payload.id && obj.type === action.payload.type && obj.size === action.payload.size
       );
@@ -54,29 +55,37 @@ const cartSlice = createSlice({
     
 
     minusItem(state, action: PayloadAction<CartItem>) {
+      const { id } = action.payload;
       const findItem :any = state.items.find((obj) => obj.id === action.payload.id);
       if (findItem) {
         if (findItem.count > 1) {
           findItem.count--;
           state.totalPrice = state.totalPrice - action.payload.price;
+          
         } else {
           state.items = state.items.filter((obj) => obj.id !== action.payload.id);
           state.totalPrice = state.totalPrice - action.payload.price;
         }
       }
+
+      state.totalCountersById[id] = state.totalCountersById[id] - 1
     },
 
     removeItem(state, action: PayloadAction<{ id: string, uniquKey:string }>) {
+      const { id } = action.payload;
       const findItem = state.items.find((obj) => obj.uniquKey === action.payload.uniquKey);
       if (findItem) {
         state.totalPrice = state.totalPrice - findItem.price * findItem.count;
         state.items = state.items.filter((obj) => obj.uniquKey !== action.payload.uniquKey);
+        state.totalCountersById[id] =  state.totalCountersById[id]- findItem.count
       }
     },
 
     clearItems(state) {
       state.items = [];
       state.totalPrice = 0;
+      state.totalCountersById = {}
+
     },
   },
 });
