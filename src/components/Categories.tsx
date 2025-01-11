@@ -7,7 +7,7 @@ type CategoriesProps  = {
 
 const Categories = React.memo<CategoriesProps>(({value, onClickCategory}) => {
    
- const categoriess = React.useMemo(() => ['All', 'Meat', 'Vegetarian', 'Grilled', 'Spicy', 'Calzones'], []);
+ const categoriess = React.useMemo(() => ['All', 'Meat', 'Vegetarian', 'Grilled', 'Spicy'], []);
 
     return (
       <div className="categories">

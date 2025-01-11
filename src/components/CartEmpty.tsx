@@ -8,14 +8,14 @@ const CartEmpty = () => {
           <div className="content">
             <div className="container container--cart">
               <div className="cart cart--empty">
-                <h2>Корзина пустая 😕</h2>
+                <h2> The cart is empty  😕</h2>
                 <p>
-                  Вероятней всего, вы не заказывали ещё пиццу.<br />
-                  Для того, чтобы заказать пиццу, перейди на главную страницу.
+                You haven't ordered a pizza yet.
+                To order a pizza, please go to the main page.
                 </p>
                 <img src="../public/img/empty-cart.png" alt="Empty cart" />
                 <Link to='/' className="button button--black">
-                  <span>Вернуться назад</span>
+                  <span>Go back</span>
                   </Link>
               </div>
             </div>

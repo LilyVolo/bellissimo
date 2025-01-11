@@ -34,8 +34,9 @@ interface RootState {
 
 const Home: React.FC = () => {
   const dispatch = useDispatch()
-  
-  const { categoryId, sortType, currentPage, searchValue } = useSelector(
+  const [currentPage, setCurrentPage] = React.useState(1);
+
+  const { categoryId, sortType, searchValue } = useSelector(
     (state: RootState) => state.filter
   )
   
@@ -44,14 +45,14 @@ const Home: React.FC = () => {
   const [pizzas, setPizzas] = React.useState<Pizza[]>([]) // Типизируем pizzas как массив Pizza
   const [isLoading, setIsLoading] = React.useState<boolean>(true) // Типизируем isLoading как boolean
 
-  let url = `https://671ba6912c842d92c380c897.mockapi.io/bellissimo?page=${currentPage}&limit=4&${
+  let url = `https://671ba6912c842d92c380c897.mockapi.io/bellissimo?page=${currentPage}&${
     categoryId > 0 ? `category=${categoryId}` : ''
   }&sortBy=${sort}&order=desc`
 
-  const onChangePage = (number: number) => {
-    dispatch(setCurrentPage(number))
-  }
 
+  const onChangePage = (selectedPage: number) => {
+    setCurrentPage(selectedPage); // Обновляем текущую страницу
+  };
   const onClickCategory = React.useCallback(
     (id: number) => {
       dispatch(setCategoryId(id))
@@ -76,19 +77,22 @@ const Home: React.FC = () => {
     window.scrollTo(0, 0)
   }, [categoryId, sortType, currentPage, url])
 
+  const indexOfLastPizza = (currentPage) * 8
+  const indexOfFirstPizza = indexOfLastPizza - 8
+
+ 
   const allPizzas = pizzas
     .filter((obj: Pizza) => {
-      // Если searchValue не задано, возвращаем true (все пиццы проходят фильтр)
       if (!searchValue) return true
-
-      // Если searchValue задано, фильтруем по совпадению
       return obj.title.toLowerCase().includes(searchValue.toLowerCase())
     })
+    .slice(indexOfFirstPizza, indexOfLastPizza)
     .map((obj: Pizza) => (
       <PizzaBlock key={obj.id} {...obj} />
     ))
-
+    
   const skeletonArr = [...new Array(6)].map((_, i) => <Skeleton key={i} />)
+
 
   return (
     <div className="container">
@@ -99,7 +103,7 @@ const Home: React.FC = () => {
       <h2 className="content__title">All our pizzas</h2>
       <div className="content__items">{isLoading ? skeletonArr : allPizzas}</div>
 
-      <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+      <Pagination categoryId={categoryId} currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   )
 }
