@@ -5,13 +5,13 @@ import CartItem from '../components/CartItem'
 import {clearItems} from '../redux/slices/cartSlice'
 import CartEmpty from '../components/CartEmpty'
 
-type CartItemProps = {
+export type CartItemProps = {
   id: string;
   title: string;
   type: string;
   price: number;
   count: number;
-  imageURL: string;
+  imageUrl: string;
   size: number;
   uniquKey: string;
   }
@@ -20,7 +20,7 @@ const Cart:React.FC = () => {
   const dispatch = useDispatch()
   const { totalPrice, items } = useSelector((state: { cart: { totalPrice: number; items: CartItemProps[] } }) => state.cart)
   const totalCount = items.reduce((sum: number, item: CartItemProps) => sum + item.count, 0)
-
+  console.log(items, 'check');
 
   const onClickClear = () => {
     if (window.confirm('Do you want to delete all ites from the cart?')) {

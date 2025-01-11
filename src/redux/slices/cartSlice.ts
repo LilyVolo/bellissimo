@@ -31,7 +31,6 @@ const cartSlice = createSlice({
     addItem(state, action: PayloadAction<CartItem>) {
       const { id, type, size } = action.payload;
       const uniqueKey = `${id}-${type}-${size}`
-      
       const findItem = state.items.find((obj) => obj.id === action.payload.id 
       && obj.type === action.payload.type && obj.size === action.payload.size) ;
       if (findItem) {
@@ -39,7 +38,7 @@ const cartSlice = createSlice({
       } else {
         state.items.push({ ...action.payload, count: 1, uniquKey: uniqueKey });
       }
-
+      
       state.totalPrice = calcTotalPrice(state.items);
     },
 

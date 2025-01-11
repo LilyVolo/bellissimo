@@ -10,7 +10,7 @@ type CarItemProps = {
   type: string, 
   price: number, 
   count: number, 
-  imageUrl: string, 
+  imageUrl?: string, 
   size: number
 }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import {addItem} from '../redux/slices/cartSlice'
 import { Link } from 'react-router-dom'
+import { CartItemProps } from '../pages/Cart'
 
 export type PizzaBlockProps = {
     id: string, 
@@ -11,15 +12,7 @@ export type PizzaBlockProps = {
     sizes: [],
     types: []
 }
-export interface CartItem {
-  id: string;
-  title: string;
-  price: number;
-  imageUrl: string;
-  size: number;
-  type: string;
-  count?: number ;
-}
+
 
 const PizzaBlock: React.FC<PizzaBlockProps> =  
 ({id, title, price, imageUrl, sizes, types}) =>
@@ -27,16 +20,27 @@ const PizzaBlock: React.FC<PizzaBlockProps> =
   {
 
   const dispatch = useDispatch()
-  const cartItem = useSelector((state: any)=> state.cart.items.find((obj: CartItem )=> obj.id === id))
+  const cartItem = useSelector((state: any)=> state.cart.items.find((obj: CartItemProps )=> obj.id === id))
   const [activeCrust, setActiveCrust] = React.useState(0)
   const [activeSize, setActiveSize] = React.useState(0)
+   const { items } = useSelector((state: { cart: { totalPrice: number; items: CartItemProps[] } }) => state.cart)
+   const itemsArray = Array.isArray(items) ? items : Object.values(items);
 
+
+   const totalCounter : any = itemsArray
+     .filter((el) => el.id === id)
+     .reduce((sum, el) => sum + el.count, 0);
+ 
+   console.log(totalCounter); 
+
+  
+  console.log(totalCounter)
   const addedCount = cartItem ? cartItem.count : 0
   
   const crust = ['thin crust', 'thick crust']
 
   const onClickAdd = () => {
-      const item: CartItem  = {
+      const item: CartItemProps  = {
         id, 
         title,
         price,
@@ -45,6 +49,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> =
         type: crust[activeCrust],
       }
       dispatch(addItem(item))
+      console.log(cartItem )
     }
 
     return (
@@ -95,7 +100,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> =
         />
       </svg>
       <span >Add</span>
-      {cartItem && <i>{addedCount}</i>} 
+      {cartItem && <i>{totalCounter}</i>} 
     </button>
   </div>
   </div>
