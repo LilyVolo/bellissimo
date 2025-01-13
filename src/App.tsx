@@ -11,7 +11,6 @@ import OnePizzaPage from './pages/onePizza/OnePizzaPage'
 function App() {
 console.log('pizza run')
   return (
-    <>
      <div className="wrapper">
 
       <Header  />
@@ -26,7 +25,6 @@ console.log('pizza run')
         
       </div>
     </div>
-    </>
   )
 }
 

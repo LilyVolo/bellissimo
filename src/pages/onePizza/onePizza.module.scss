@@ -104,3 +104,28 @@
     letter-spacing: 0.015em;
   }
 }
+
+@media (max-width: 1060px) {
+  .content__items {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .pizzaBlock {
+    width: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .pizzaBlockText {
+    width: 100%;
+    margin: auto;
+  }
+
+  .contentBottom {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

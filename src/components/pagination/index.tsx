@@ -17,7 +17,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, onChangePage, cate
 
   return (
     categoryId === 0 && (
-      <div>
+      <div className={'pagination-container'}>
         <ReactPaginate
           className={styles.root}
           nextLabel=">"

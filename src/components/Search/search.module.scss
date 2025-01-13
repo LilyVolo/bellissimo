@@ -34,3 +34,9 @@
         opacity: 0.8;
     }
 }
+
+@media (max-width: 1060px) {
+    .input {
+        width: fit-content;
+    }
+}
